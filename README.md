@@ -52,9 +52,22 @@ cp .env.example .env
 uv run python -m src.main
 ```
 
-## Docker Deployment
+## Deployment
 
-### With Docker Compose (recommended)
+### Railway (Recommended - Free)
+
+1. Fork this repo or push to your GitHub
+2. Go to [railway.app](https://railway.app) and sign up
+3. Click **New Project** → **Deploy from GitHub repo**
+4. Select your polybot repository
+5. Add environment variables:
+   - `TELEGRAM_BOT_TOKEN` - Your bot token
+   - `ENVIO_GRAPHQL_URL` - Your ENVIO endpoint
+6. Click **Deploy**
+
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template)
+
+### Docker (Local/VPS)
 
 ```bash
 # Configure environment
@@ -68,26 +81,10 @@ docker compose up -d
 docker compose logs -f polybot
 ```
 
-### With Cloudflare Tunnel
-
-1. Create a tunnel in [Cloudflare Zero Trust Dashboard](https://one.dash.cloudflare.com/)
-2. Copy the tunnel token
-3. Add to `.env`:
-   ```
-   CLOUDFLARE_TUNNEL_TOKEN=your_tunnel_token_here
-   ```
-4. Run with tunnel:
-   ```bash
-   docker compose up -d
-   ```
-
-### Docker Only (without tunnel)
+### Docker Only
 
 ```bash
-# Build
 docker build -t polybot .
-
-# Run
 docker run -d --name polybot --env-file .env -v ./data:/app/data polybot
 ```
 
@@ -254,10 +251,9 @@ Trader | Market
 |----------|----------|-------------|
 | `TELEGRAM_BOT_TOKEN` | Yes | Bot token from @BotFather |
 | `ENVIO_GRAPHQL_URL` | Yes | ENVIO GraphQL endpoint for trade detection |
-| `CLOUDFLARE_TUNNEL_TOKEN` | No | Cloudflare tunnel token (for Docker deployment) |
-| `GAMMA_API_URL` | No | Gamma API (default: https://gamma-api.polymarket.com) |
-| `DATA_API_URL` | No | Data API (default: https://data-api.polymarket.com) |
-| `CLOB_API_URL` | No | CLOB API (default: https://clob.polymarket.com) |
+| `GAMMA_API_URL` | No | Gamma API (default provided) |
+| `DATA_API_URL` | No | Data API (default provided) |
+| `CLOB_API_URL` | No | CLOB API (default provided) |
 | `LOG_LEVEL` | No | Logging level (default: INFO) |
 | `POLL_INTERVAL` | No | Fallback poll interval in seconds |
 
