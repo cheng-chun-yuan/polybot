@@ -13,7 +13,6 @@ RUN uv sync --frozen --no-dev
 
 # Copy source code
 COPY src/ ./src/
-COPY .env* ./
 
 # Create data directory
 RUN mkdir -p data
