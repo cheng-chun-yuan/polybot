@@ -1,0 +1,27 @@
+services:
+  polybot:
+    build: .
+    container_name: polybot
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+    networks:
+      - polybot-network
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run
+    environment:
+      - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN}
+    networks:
+      - polybot-network
+    depends_on:
+      - polybot
+
+networks:
+  polybot-network:
+    driver: bridge
