@@ -1,0 +1,29 @@
+[project]
+name = "polybot"
+version = "0.1.0"
+description = "Telegram bot for tracking Polymarket trades"
+requires-python = ">=3.11"
+dependencies = [
+    "python-telegram-bot>=21.0",
+    "httpx>=0.27.0",
+    "aiosqlite>=0.20.0",
+    "python-dotenv>=1.0.0",
+    "websockets>=12.0",
+]
+
+[project.scripts]
+polybot = "src.main:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]

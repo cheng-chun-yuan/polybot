@@ -1,0 +1,12 @@
+{
+  "subscriptions": {
+    "min_usd": 10,
+    "side": null,
+    "tracked_wallets": [],
+    "keywords": []
+  },
+  "settings": {
+    "interval": 15,
+    "limit": 20
+  }
+}
